@@ -6,6 +6,11 @@
 #' @references https://en.wikipedia.org/wiki/Linear_regression
 #' @author Niclas Lovsjö & Maxime Bonneau
 
+#model to test functions with. erase later.
+
+formula<-iris$Sepal.Length~iris$Petal.Length
+data<-iris
+
 
 linreg<-function(formula,data){
         #error handling, might wanna add more.
@@ -25,12 +30,13 @@ linreg<-function(formula,data){
         
         #now we can use regular lin.alg. to find the needed values
         
-        n<-ncol(X)
+        p<-ncol(X)-1
+        n<-length(y)
         
         beta_hat<-solve(t(X)%*%X)%*%(t(X)%*%y)
         y_hat<-X%*%beta_hat
         eps_hat<-y-y_hat
-        df<-length(y)-(n-1)
+        df<-n-p
         sigma_sq<-as.numeric(t(eps_hat)%*%eps_hat)/df
         var_beta_hat<-sigma_sq*solve(t(X)%*%X)
         t_beta<-beta_hat/sqrt(diag(var_beta_hat))
@@ -39,13 +45,17 @@ linreg<-function(formula,data){
         
         
         result<-list(coefficients=beta_hat, resid=eps_hat, 
-                     df.residual=df,rank=ncol(X)-1,call=call("linreg",formula))
+                     df.residual=df,rank=ncol(X)-1,
+                     call=call("linreg",formula),
+                     fitted.values=as.vector(X%*%beta_hat))
         
         #build class
         class(result)<-"linreg"
         
         #this is our new class "linreg"
-        #which we can set attr to, such as "coefficients" etc
+        #which we have set attr to according to the list above
+        # such as "coefficients" etc
+        
         #set methods
         
         #I am not sure if we can define methods inside the
