@@ -41,6 +41,12 @@ linreg<-function(formula,data){
         var_beta_hat<-sigma_sq*solve(t(X)%*%X)
         t_beta<-beta_hat/sqrt(diag(var_beta_hat))
         
+        #hat-matrix: H=X(t(X)X)^-1 t(X)
+        #variance of a particular residual is
+        #var(e_i)=sigma_sq(1-H_(ii))
+        #so that standardized residual is
+        #e_i/(sqrt(var(e_i)))
+        #we will use this as a method, ie rstandard.linreg
         
         result<-list(coefficients=beta_hat, resid=eps_hat, 
                      df.residual=df,rank=ncol(X)-1,
