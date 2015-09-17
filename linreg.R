@@ -41,8 +41,6 @@ linreg<-function(formula,data){
         var_beta_hat<-sigma_sq*solve(t(X)%*%X)
         t_beta<-beta_hat/sqrt(diag(var_beta_hat))
         
-        #To Maxime: it was just to use "diag" to get the var-values.
-        
         
         result<-list(coefficients=beta_hat, resid=eps_hat, 
                      df.residual=df,rank=ncol(X)-1,
@@ -75,6 +73,8 @@ linreg<-function(formula,data){
         
         #Cant get it to print "call...blabalba"
         #and perhaps tab it
+        cat("Call:","\n")
+        print(result$call)
         cat("\n")
         cat("Coefficients:","\n")
         cat(colnames(X),"\n")
