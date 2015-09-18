@@ -41,13 +41,30 @@ linreg<-function(formula,data){
         var_beta_hat<-sigma_sq*solve(t(X)%*%X)
         t_beta<-beta_hat/sqrt(diag(var_beta_hat))
         
-        #To Maxime: it was just to use "diag" to get the var-values.
+        #hat-matrix: H=X(t(X)X)^-1 t(X)
+        #variance of a particular residual is
+        #var(e_i)=sigma_sq(1-H_(ii))
+        #so that standardized residual is
+        #e_i/(sqrt(var(e_i)))
+        #we will use this as a method, ie rstandard.linreg
         
+        #studentized residuals:
+        H<-X%*%solve(t(X)%*%X)%*%t(X)   #i.e. hat-matrix
+        #we define stud. residuals as eps_hat[i]/sqrt(sigma_sq*(1-H[i]))
+        stud_eps<-function(){
+                stud_eps<-c()
+                for (i in 1:length(eps_hat)){
+                        stud_eps<-c(stud_eps,eps_hat[i]/sqrt(sigma_sq*(1-H[i])))
+                }
+                return(stud_eps)
+        }
+        stud_eps<-stud_eps()
         
         result<-list(coefficients=beta_hat, resid=eps_hat, 
                      df.residual=df,rank=ncol(X)-1,
                      call=call("linreg",formula),
-                     fitted.values=as.vector(X%*%beta_hat))
+                     fitted.values=as.vector(X%*%beta_hat),
+                     rstudent=stud_eps)
         
         #build class
         class(result)<-"linreg"
@@ -75,10 +92,6 @@ linreg<-function(formula,data){
         
         #Cant get it to print "call...blabalba"
         #and perhaps tab it
-        cat("\n")
-        cat("Coefficients:","\n")
-        cat(colnames(X),"\n")
-        cat(result$coefficients)
         
         return(result)
 }
