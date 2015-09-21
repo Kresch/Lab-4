@@ -1,9 +1,12 @@
 #method: resid
 
-residus.linreg <- function(X)
-  UseMethod("residus")
+resid<-function(X){
+        UseMethod("resid")
+}
 
-residus.linreg<-function(X){
+
+resid.linreg<-function(X){
         return(X$resid)
 }
 
+#ask måns about this.
