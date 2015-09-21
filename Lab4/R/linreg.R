@@ -68,7 +68,9 @@ linreg<-function(formula,data){
         
         #build class
         class(result)<-"linreg"
-        
+        resid.linreg<-function(X){
+                return(X$resid)
+        }
         #this is our new class "linreg"
         #which we have set attr to according to the list above
         # such as "coefficients" etc

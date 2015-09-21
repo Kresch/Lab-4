@@ -31,13 +31,10 @@ plot.linreg <- function(X){
         
         res_plot<-ggplot(data,aes(fitted,resid)) + 
                 geom_point(aes(color=abs(resid),shape=factor(outl)),size=4)+
-#                 if (!is.na(index.na)){
-#                        geom_text(aes(label=index),hjust=-0.4,size=4)
-#                 } 
                 geom_text(aes(label=index),hjust=-0.4,size=4) +
                 scale_colour_gradientn(colours=c("blue","white","red"))+
                 scale_shape(solid=TRUE) +
-                theme_minimal() +
+                theme_light() +
                 stat_smooth(method="loess",se=FALSE) +
                 labs(title = "Residuals Vs. Fitted values",x="Fitted values",y="Residuals")
                 
@@ -49,13 +46,15 @@ plot.linreg <- function(X){
                 geom_text(aes(label=index),hjust=-0.4,size=4) +
                 scale_colour_gradientn(colours=c("blue","white","red"))+
                 scale_shape(solid=TRUE) +
-                theme_minimal() +
+                theme_light() +
                 stat_smooth(method="loess",se=FALSE) +
                 labs(title = "Scale-Location",x="Fitted values",y="sqrt of Standardized Residuals")
         
+                
         p3<-arrangeGrob(
                 res_plot,stud_plot,nrow=2
         )
+        plot(p3)
         
 }
 
