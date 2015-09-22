@@ -6,7 +6,7 @@ resid<-function(X){
 
 
 resid.linreg<-function(X){
-        return(X$resid)
+        return(c(X$resid))
 }
 
-#ask måns about this.
+

@@ -19,9 +19,22 @@ linreg<-function(formula,data){
         if(!is.data.frame(data)){
                 stop(cat(data, "is not a data.frame!"))
         }
-        
-        
-        
+#         
+#         data1<-as.character(data)
+#         formula[2] <- paste(data1,"$",as.character(formula[2]), sep = "")
+#         vect <- unlist(strsplit(as.character(formula[3]), "[+]"))
+#         for(i in 1:length(vect)){
+#                 vect[i]<- paste(data1, "$", vect[i], sep = "")
+#         }
+#         formula1 <- paste(formula[2], formula[1])
+#         formula1 <- paste(formula1, vect[1])
+#         j <- 2
+#         while(j <= length(vect)){
+#                 formula1 <- paste(formula1, "+", vect[j])
+#                 j <- j+1
+#         }
+#         formula <- as.formula(formula1)
+#         
         #design matrix X
         X<-model.matrix(formula,data)
         
@@ -91,7 +104,7 @@ linreg<-function(formula,data){
         
         #use those later 
         
-        
+        # devAskNewPage()
         #Cant get it to print "call...blabalba"
         #and perhaps tab it
         
