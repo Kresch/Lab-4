@@ -8,6 +8,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r}
+library(Lab4)
+```
+
 ##Description
 Linreg is a package that performs linear regression. It takes a *formula* of the form *Y~**X***, where **X** and **Y** are vector-valued, and a *data-frame* from which we can take the values of **Y** and **X**. 
 
@@ -27,12 +32,12 @@ The function *Linreg* returns a list of the class *Linreg*, having the elements:
         Returns a named vector of the estimate of the coefficients.  
 
 ```{r}
-X<-linreg(iris$Petal.Length~iris$Sepal.Length,data=iris)
+X<-linreg(Petal.Length~Sepal.Length,data=iris)
 plot(X)
 ```
 
 
-> "He who uses Linreg, might just as well use lm ~ Unknown thinker"
+> "He who uses linreg, might just as well use lm ~ Unknown thinker"
 
 
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:

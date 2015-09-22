@@ -8,13 +8,12 @@
 
 #model to test functions with. erase later.
 
-formula<-iris$Sepal.Length~iris$Petal.Length
-data<-iris
 
 
 linreg<-function(formula,data){
   
   data1 <- deparse(substitute(data))
+  formula1 <- c()
   formula1[2] <- paste(data1,"$",as.character(formula[2]), sep = "")
   vect <- unlist(strsplit(as.character(formula[3]), "[+]"))
   for(i in 1:length(vect)){
