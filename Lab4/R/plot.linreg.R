@@ -1,4 +1,13 @@
-####ggplot2
+#method: plot
+
+#' @title plot
+#' @param what results of the use of linreg function
+#' @description plots two graphs with the values calculated by linreg function :
+#'  - one plots residuals vs fitted values
+#'  - the other one plots the scale location, ie the square root of the 
+#'  absolute value of the residuals
+#' @return the two plots described over
+
 #install.packages("gridExtra")
 library(ggplot2)
 library(gridExtra)
