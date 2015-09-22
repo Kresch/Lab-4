@@ -22,20 +22,27 @@ plot.linreg <- function(X){
 #         Q1<-quantile(resid,0.25)
 #         Q3<-quantile(resid,0.75)
         #outl_q<-c(Q1-1.3*(Q3-Q1),Q3+1.3*(Q3-Q1))
-        outl<-c(rep(0,times=length(resid)))
-        outl[c(which(abs(resid)>1))]<-
-                c(rep(1,times=length(which((abs(resid)>1)))))
+#         outl<-c(rep(0,times=length(resid)))
+#         outl[c(which(abs(resid)>1))]<-
+#                 c(rep(1,times=length(which((abs(resid)>1)))))
         #use a better def. of outlier
         
-        #indexes the outliers to use in plot
-        index<-c(rep(NA,times=length(resid)))
-        index[c(which(outl==1))]<-c(which(outl==1))
+        
 #         index.na <- NA
 #         for(i in 1:length(index)){
 #                 if(!is.na(index[i])){
 #                         index.na <- 0
 #                 }
 #         }
+        
+        #find 3 max resids:
+        outl<-c(rep(0,times=length(resid)))
+        max3<-tail(sort(abs(resid)),3)
+        outl[which(abs(resid) >= min(max3))]<-c(1,1,1)
+        #indexes the outliers to use in plot
+        index<-c(rep(NA,times=length(resid)))
+        index[c(which(outl==1))]<-c(which(outl==1))
+        
         data<-data.frame(resid,fitted,outl,index,sqrt_sq_resid)
         
         res_plot<-ggplot(data,aes(fitted,resid)) + 
@@ -63,7 +70,7 @@ plot.linreg <- function(X){
         p3<-arrangeGrob(
                 res_plot,stud_plot,nrow=2
         )
-        plot(p3)
         
+        plot(p3)
 }
 

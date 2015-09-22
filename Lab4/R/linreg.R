@@ -35,9 +35,7 @@ linreg<-function(formula,data){
         if(!is.data.frame(data)){
                 stop(cat(data, "is not a data.frame!"))
         }
-        
-        
-        
+         
         #design matrix X
         X<-model.matrix(formula,data)
         
@@ -90,6 +88,23 @@ linreg<-function(formula,data){
         
         #set methods
         
+        #I am not sure if we can define methods inside the
+        #function like this.
+#         resid.linreg<<-function(result){
+#                 result$resid
+#         }
+#         coefficients.linreg<<-function(result){
+#                 result$coefficients
+#         }
+#         pred.linreg<<-function(result,x){
+#                 x%*%result$coefficients
+#         }
+        
+        #use those later 
+        
+        # devAskNewPage()
+        #Cant get it to print "call...blabalba"
+        #and perhaps tab it
         
         return(result)
 }

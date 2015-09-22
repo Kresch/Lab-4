@@ -14,3 +14,10 @@ test_that("Output of linreg() mimics lm() for multiple reg", {
         expect_equal(coefficients(my_reg_mult),coefficients(R_reg_mult))
         expect_equal(resid(my_reg_mult),resid(R_reg_mult))
 })
+
+no_data_reg<-linreg(Sepal.Length~Sepal.Width)
+
+test_that("We can both input with and without data before $",{
+        expect_equal(no_data_reg,my_reg)
+}
+          )

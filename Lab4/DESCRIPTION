@@ -7,4 +7,7 @@ Author: Niclas Lovsjö, Maxime Bonneau
 Maintainer: <niclas.lovsjo@me.com>
 Description: Multiple linear regression. Mimics the lm-fun in R.
 License: GPL-2
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
