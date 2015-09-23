@@ -80,7 +80,8 @@ linreg<-function(formula,data){
                      rstudent=stud_eps)
         
         #build class
-
+        class(result)<-"linreg"
+        
         #this is our new class "linreg"
         #which we have set attr to according to the list above
         # such as "coefficients" etc

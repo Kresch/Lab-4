@@ -10,7 +10,7 @@
 
 <meta name="author" content="Maxime Bonneau, Niclas Lovsjö" />
 
-<meta name="date" content="2015-09-22" />
+<meta name="date" content="2015-09-23" />
 
 <title>Linreg Vignette</title>
 
@@ -54,10 +54,21 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Linreg Vignette</h1>
 <h4 class="author"><em>Maxime Bonneau, Niclas Lovsjö</em></h4>
-<h4 class="date"><em>2015-09-22</em></h4>
+<h4 class="date"><em>2015-09-23</em></h4>
 </div>
 
 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Lab4)</code></pre>
+<pre><code>## 
+## Attaching package: 'Lab4'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     resid
+## 
+## The following object is masked from 'package:graphics':
+## 
+##     plot</code></pre>
 <div id="description" class="section level2">
 <h2>Description</h2>
 <p>Linreg is a package that performs linear regression. It takes a <em>formula</em> of the form <em>Y~<strong>X</strong></em>, where <strong>X</strong> and <strong>Y</strong> are vector-valued, and a <em>data-frame</em> from which we can take the values of <strong>Y</strong> and <strong>X</strong>.</p>
@@ -79,8 +90,20 @@ Plots the Residuals vs. fitted values and Scale-location.  </code></pre></li>
 <li><pre><code>coef(X):  
 Returns a named vector of the estimate of the coefficients.  </code></pre></li>
 </ul>
-<pre><code>X&lt;-linreg(Petal.Length~Sepal.Length,data=iris)
-plot(X)</code></pre>
+</div>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<pre class="sourceCode r"><code class="sourceCode r">our_linear_regression &lt;-<span class="st"> </span><span class="kw">linreg</span>(Petal.Length~Sepal.Length,iris)
+<span class="kw">print</span>(our_linear_regression)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">X&lt;-<span class="kw">linreg</span>(Petal.Length~Sepal.Length,iris)
+<span class="kw">print</span>(X)</code></pre>
+<pre><code>## Call: 
+## linreg(Petal.Length ~ Sepal.Length)
+## 
+## Coefficients: 
+## (Intercept) Sepal.Length 
+## -7.101443 1.858433</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(our_linear_regression)</code></pre>
 <blockquote>
 <p>“He who uses linreg, might just as well use lm ~ Unknown thinker”</p>
 </blockquote>

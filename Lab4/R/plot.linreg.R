@@ -11,6 +11,11 @@
 #install.packages("gridExtra")
 library(ggplot2)
 library(gridExtra)
+
+plot<-function(X){
+  UseMethod("plot")
+}
+
 plot.linreg <- function(X){
         resid <- as.vector(X$resid)
         fitted <- as.vector(X$fitted.values)
@@ -70,7 +75,6 @@ plot.linreg <- function(X){
         p3<-arrangeGrob(
                 res_plot,stud_plot,nrow=2
         )
-        
-        plot(p3)
+        grid.arrange(p3)
 }
 
