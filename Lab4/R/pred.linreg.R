@@ -8,7 +8,7 @@
 #' @return a vector with the predicted values
 
 pred<-function(result,x){
-        UseMethod("pred")
+        UseMethod("pred",result)
 }
 
 pred.linreg<<-function(result,x){

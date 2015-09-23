@@ -1,6 +1,7 @@
 #method: plot
 
 #' @title plot
+#' @name plot
 #' @param what results of the use of linreg function
 #' @description plots two graphs with the values calculated by linreg function :
 #'  - one plots residuals vs fitted values
@@ -11,6 +12,11 @@
 #install.packages("gridExtra")
 library(ggplot2)
 library(gridExtra)
+
+plot<-function(X){
+  UseMethod("plot")
+}
+
 plot.linreg <- function(X){
         resid <- as.vector(X$resid)
         fitted <- as.vector(X$fitted.values)
@@ -70,7 +76,6 @@ plot.linreg <- function(X){
         p3<-arrangeGrob(
                 res_plot,stud_plot,nrow=2
         )
-        
-        plot(p3)
+        grid.arrange(p3)
 }
 

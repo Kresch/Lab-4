@@ -1,11 +1,21 @@
 ## ------------------------------------------------------------------------
-X<-linreg(iris$Petal.Length~iris$Sepal.Length,data=iris)
-plot(X)
+library(Lab4)
+library(ggplot2)
+library(gridExtra)
 
-## ---- fig.show='hold'----------------------------------------------------
-plot(1:10)
-plot(10:1)
+## ------------------------------------------------------------------------
+our_linear_regression <- linreg(Petal.Length~Sepal.Length,iris)
+print(our_linear_regression)
 
-## ---- echo=FALSE, results='asis'-----------------------------------------
-knitr::kable(head(mtcars, 10))
+## ------------------------------------------------------------------------
+plot(our_linear_regression)
+
+## ------------------------------------------------------------------------
+coef(our_linear_regression)
+
+## ------------------------------------------------------------------------
+resid(our_linear_regression)
+
+## ------------------------------------------------------------------------
+pred(our_linear_regression, 2)
 
