@@ -56,16 +56,24 @@ ridgereg<-function(formula,data,lambda=0){
         p<-ncol(X)-1
         n<-length(y)
         
-        norm_X<-apply(X[,2:ncol(X)],2,norm_data)
+        # norm_X<-apply(X[,2:ncol(X)],2,norm_data)
+        #doesnt work for ncol(X)=2 i.e. 1 covariate obv.
+        #change to:
+        
+        
+        if (ncol(X)==2){
+                norm_X<-norm_data(X[,2])
+        } else {norm_X<-apply(X[,c(2:ncol(X))],2,norm_data)}
         norm_X<-cbind(rep(1,ncol(X)),norm_X)
-        #normalizes X and takes out intercept before and then enter it after normalizing.
+        
+        #takes out intercept and normalizes X, then enter intercept after normalizing.
         #i.e. we dont wanna normalize the intercept.
         
         B_ridge<-function(lambda){
                 res<-solve(t(norm_X)%*%norm_X+lambda*diag(ncol(norm_X)))%*%(t(norm_X)%*%y)
                 return(res)
         }
-        # I dont know how to handle lambda here
+        
         beta_hat<-B_ridge(1)
         fitted.values<-norm_X%*%beta_hat
         result<-list(coefficients=beta_hat,fitted.values=fitted.values)
