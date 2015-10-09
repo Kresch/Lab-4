@@ -2,7 +2,7 @@
 
 #' @name ridgereg
 #' @author Niclas Lovsjö & Maxime Bonneau
-#' @description 
+#' @description Uses ridge regression to fit a model.
 #' @param lambda - hyperparameter to be tuned. if not specified, we set it to 0.
 #' @param a "formula" of the form y ~ x+... and a dataframe
 #' @references ESLII: http://web.stanford.edu/~hastie/local.ftp/Springer/OLD/ESLII_print4.pdf
@@ -71,5 +71,5 @@ ridgereg<-function(formula,data,lambda=0){
         result<-list(coefficients=beta_hat,fitted.values=fitted.values)
         class(result)<-"ridgereg"
         
-        
+        return(result)
 }
