@@ -11,11 +11,11 @@
 #these will be inputed as data.frames with the coefficient names. These can be extracted by:
 
 
-predict<-function(X,result){
-        UseMethod("predict",X)
+predict<-function(result,...){
+        UseMethod("predict")
 }
 
-predict.ridgereg<<-function(result,newdata){
+predict.ridgereg<-function(result,newdata){
         if(!is.data.frame(newdata)){stop("newdata is not a data.frame!")}
                 newdata<-cbind(intercept=rep(1,nrow(newdata)),newdata)
                 res<-as.matrix(newdata)%*%result$coefficients

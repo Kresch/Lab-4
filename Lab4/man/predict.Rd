@@ -4,7 +4,7 @@
 \alias{predict}
 \title{predict ridge}
 \usage{
-predict(X, result)
+predict(result, ...)
 }
 \arguments{
 \item{what}{results of the use of ridgereg function, and a numeric vector, which length is the

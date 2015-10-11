@@ -4,7 +4,7 @@
 \alias{pred}
 \title{pred}
 \usage{
-pred(X, result)
+pred(result, ...)
 }
 \arguments{
 \item{what}{results of the use of linreg function, and a numeric vector, which length is the

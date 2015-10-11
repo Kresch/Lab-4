@@ -1,5 +1,5 @@
 #tests ridgereg
-
+library(Lab4)
 library(stringr)
 data("iris")
 my_ridge<-ridgereg(Sepal.Length ~ Sepal.Width, iris)
@@ -8,10 +8,13 @@ newdata=data.frame(c(1,2,3,4,5))
 test_that("The function is affected by changing lambda", {
         expect_more_than(abs(coefficients(my_ridge)-coefficients(my_ridge_lambda)), 0.001)
 })
-
-test_that("We can use methods without errors is being thrown", {
+test_that("We can use method predict without errors is being thrown", {
         expect_that(predict(my_ridge,newdata), not(throws_error()))
+})
+test_that("We can use methods coef without errors is being thrown", {
         expect_that(coef(my_ridge), not(throws_error()))
+})
+test_that("We can use methods print without errors is being thrown", {
         expect_that(print(my_ridge), not(throws_error()))
 })
-          
+

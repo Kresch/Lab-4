@@ -53,9 +53,7 @@ resid(our_linear_regression)
 ```
 
 ```{r}
-pred<-function(X,result){
-        UseMethod("pred",X)
-}
+
 pred(our_linear_regression, 2)
 ```
 

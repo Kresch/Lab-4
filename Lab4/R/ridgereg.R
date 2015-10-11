@@ -80,7 +80,6 @@ ridgereg<-function(formula,data,lambda=0){
 #         }
         # solve(t(X)%*%X)%*%(t(X)%*%y)
         beta_hat<-solve(t(X)%*%X+lambda*diag(ncol(X)))%*%(t(X)%*%y)
-        print(beta_hat)
         fitted.values<-X%*%beta_hat
         result<-list(coefficients=beta_hat,fitted.values=fitted.values,
                      call=call("ridgereg",formula))
