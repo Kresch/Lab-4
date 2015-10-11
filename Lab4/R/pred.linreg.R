@@ -7,10 +7,10 @@
 #' ie it calculates y hat for the vector of values in parameter
 #' @return a vector with the predicted values
 
-pred<-function(result,x){
-        UseMethod("pred",result)
+pred<-function(X,result){
+        UseMethod("pred",X)
 }
-
+#The error of building comes from that we didnt have the X argument in usemethod...
 pred.linreg<<-function(result,x){
         c(1,x)%*%result$coefficients
 }
