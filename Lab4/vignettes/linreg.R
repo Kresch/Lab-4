@@ -17,8 +17,6 @@ coef(our_linear_regression)
 resid(our_linear_regression)
 
 ## ------------------------------------------------------------------------
-pred<-function(X,result){
-        UseMethod("pred",X)
-}
+
 pred(our_linear_regression, 2)
 

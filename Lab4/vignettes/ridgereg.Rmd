@@ -1,0 +1,24 @@
+---
+title: "ridgereg"
+author: "Niclas Lovsjö, Maxime Bonneau"
+date: "11 oktober 2015"
+output: html_document
+---
+
+We have built the function ridgereg, which makes ridge regression out of a dataset by being fed a formula and some data. We can also define a lambda, which the default is set to 0. This is done like this,
+
+```{r,message=FALSE}
+library(Lab4)
+data(iris)
+model1<-ridgereg(Sepal.Length~Sepal.Width+Petal.Length,iris)
+model1$coefficients
+model2<-ridgereg(Sepal.Length~Sepal.Width+Petal.Length,iris, lambda=2)
+model2$coefficients
+```
+  
+Predictions are done by,
+  
+```{r}
+newdata<-data.frame(c(1,2,3),c(4,3,2))
+predict(model2,newdata)
+```
