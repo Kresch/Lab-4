@@ -1,6 +1,7 @@
 #Ridgereg
 
 #' @name ridgereg
+#' @title ridgereg
 #' @author Niclas Lovsjö & Maxime Bonneau
 #' @description Uses ridge regression to fit a model.
 #' @param lambda - hyperparameter to be tuned. if not specified, we set it to 0.
