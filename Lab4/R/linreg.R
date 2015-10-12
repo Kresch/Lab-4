@@ -42,7 +42,6 @@ linreg<-function(formula,data){
         y<-as.matrix(data[all.vars(formula1)[2]])
         
         #now we can use regular lin.alg. to find the needed values
-        
         p<-ncol(X)-1
         n<-length(y)
         

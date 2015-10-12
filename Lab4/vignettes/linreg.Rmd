@@ -53,6 +53,7 @@ resid(our_linear_regression)
 ```
 
 ```{r}
+
 pred(our_linear_regression, 2)
 ```
 

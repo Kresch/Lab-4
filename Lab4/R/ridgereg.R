@@ -27,6 +27,7 @@ ridgereg<-function(formula,data,lambda=0){
         formula1 <- c()
         formula1[2] <- paste(data1,"$",as.character(formula[2]), sep = "")
         vect <- unlist(strsplit(as.character(formula[3]), "[+]"))
+        names_i_need<-vect
         for(i in 1:length(vect)){
                 vect[i]<- paste(data1, "$", vect[i], sep = "")
         }
@@ -48,36 +49,40 @@ ridgereg<-function(formula,data,lambda=0){
         
         #design matrix X
         X<-model.matrix(formula,data)
-        
         #all.vars(formula)[2] will always be the response
         y<-as.matrix(data[all.vars(formula1)[2]])
         
         #now we can use regular lin.alg. to find the needed values
         
-        p<-ncol(X)-1
+        p<-ncol(X)
         n<-length(y)
         
         # norm_X<-apply(X[,2:ncol(X)],2,norm_data)
         #doesnt work for ncol(X)=2 i.e. 1 covariate obv.
         #change to:
-        
-        
+        namn<-colnames(X)
+        #a mess with the names here...
         if (ncol(X)==2){
-                norm_X<-norm_data(X[,2])
-        } else {norm_X<-apply(X[,c(2:ncol(X))],2,norm_data)}
-        norm_X<-cbind(rep(1,ncol(X)),norm_X)
+                X<-norm_data(X[,2])
+                X<-cbind(rep(1,p),X)
+                colnames(X)<-namn
+        } else {
+                X<-apply(X[,c(2:ncol(X))],2,norm_data)
+                X<-cbind(Intercept=rep(1,p),X)}
         
+        # colnames(X)<-c("(Intercept)",)
         #takes out intercept and normalizes X, then enter intercept after normalizing.
         #i.e. we dont wanna normalize the intercept.
         
-        B_ridge<-function(lambda){
-                res<-solve(t(norm_X)%*%norm_X+lambda*diag(ncol(norm_X)))%*%(t(norm_X)%*%y)
-                return(res)
-        }
-        
-        beta_hat<-B_ridge(1)
-        fitted.values<-norm_X%*%beta_hat
-        result<-list(coefficients=beta_hat,fitted.values=fitted.values)
+#         B_ridge<-function(lambda){
+#                 res<-solve(t(X)%*%X+lambda*diag(ncol(X)))%*%(t(X)%*%y)
+#                 return(res)
+#         }
+        # solve(t(X)%*%X)%*%(t(X)%*%y)
+        beta_hat<-solve(t(X)%*%X+lambda*diag(ncol(X)))%*%(t(X)%*%y)
+        fitted.values<-X%*%beta_hat
+        result<-list(coefficients=beta_hat,fitted.values=fitted.values,
+                     call=call("ridgereg",formula))
         class(result)<-"ridgereg"
         
         return(result)
